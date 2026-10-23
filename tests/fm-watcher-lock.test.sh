@@ -172,6 +172,57 @@ test_stale_watch_lock_reclaimed() {
   pass "killed watcher stale lock is reclaimed"
 }
 
+# A watcher publishes its lock pid the moment it acquires the singleton lock,
+# but the EXIT trap that releases it and the steady-state INT trap only arm once
+# startup has run its recovery-marker checks. An INT landing in that startup
+# window (fm-watch-checkpoint.sh's bounded INT can) used to kill the process with
+# the default disposition and strand a lock naming a dead pid. fm-watch.sh now
+# installs an INT-only release handler right after acquisition, and
+# FM_WATCH_STARTUP_HANG holds the watcher in that handler-covered window. The
+# test waits on the hang's readiness marker rather than on the lock pid, because
+# the pid is published a few statements earlier and interrupting on its
+# appearance would race the handler's install. The watcher is launched under job
+# control because a non-interactive shell starts its background jobs with SIGINT
+# ignored, and an ignored-on-entry signal cannot be trapped.
+test_startup_window_interrupt_releases_the_lock() {
+  local dir state fakebin out pid status=0 i
+  dir=$(make_case startup-window-interrupt)
+  state="$dir/state"
+  fakebin="$dir/fakebin"
+  out="$dir/watch.out"
+  set -m
+  PATH="$fakebin:$PATH" FM_STATE_OVERRIDE="$state" FM_WATCH_STARTUP_HANG=30 \
+    FM_POLL=5 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH" > "$out" 2>&1 &
+  pid=$!
+  set +m
+  i=0
+  while [ "$i" -lt 200 ] && [ ! -e "$state/.watch-startup-hang" ]; do
+    sleep 0.05
+    i=$((i + 1))
+  done
+  assert_present "$state/.watch-startup-hang" \
+    "watcher never reached the handler-covered startup hang"
+  [ "$(cat "$state/.watch.lock/pid" 2>/dev/null || true)" = "$pid" ] \
+    || fail "the published lock pid is not the watcher we launched"
+
+  kill -INT "$pid" 2>/dev/null || true
+  # A generous ceiling spent only when the interrupt path genuinely stalls: the
+  # handler reaps the hang child and records the lock release, which a loaded
+  # machine can stretch past a few seconds. A passing case returns at once.
+  i=0
+  while [ "$i" -lt 400 ] && is_live_non_zombie "$pid"; do
+    sleep 0.05
+    i=$((i + 1))
+  done
+  is_live_non_zombie "$pid" && fail "watcher did not exit on a startup-window INT"
+  wait "$pid" 2>/dev/null || status=$?
+  [ "$status" -eq 1 ] || fail "startup-window INT exit status was $status, expected 1"
+  assert_absent "$state/.watch.lock" "a startup-window INT stranded the watch lock"
+  assert_present "$state/.watcher-down" \
+    "a startup-window INT released the lock without publishing the downtime marker"
+  pass "a watcher interrupted inside its startup window releases the singleton lock"
+}
+
 test_live_stale_watch_lock_is_actionable() {
   local dir state fakebin out err status
   dir=$(make_case live-stale-lock)
@@ -1578,6 +1629,7 @@ test_proc_pid_identity_ignores_wall_clock_and_detects_pid_reuse
 test_msys_pid_identity_uses_proc
 test_stale_watch_lock_reclaimed
 test_stale_watch_reclaim_publishes_before_clear
+test_startup_window_interrupt_releases_the_lock
 test_live_stale_watch_lock_is_actionable
 test_live_stalled_watch_lock_is_replaced_past_hard_bound
 test_guard_warnings
