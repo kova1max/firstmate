@@ -1,0 +1,9 @@
+# Live lab-home fm-watch-arm.sh, default FM_ARM_CONFIRM_TIMEOUT (10s), watcher startup made CPU-bound for 18s via BASH_ENV
+## base 7da4c362
+watcher: FAILED - no live watcher with a fresh beacon
+arm_pid=71169	watcher_pid=71507	origin=started	started_at=1793135508	ended_at=1793135519	exit_code=143	signal=TERM	reason=confirmation-timeout	beacon_age=999999	lock_before=pid:none|identity:none	lock_after=pid:none|identity:none	successor=none
+## target 74f0b1ff (elapsed 22s)
+watcher: started pid=79104 (beacon fresh)
+## target, stalled startup (exec sleep 60, no CPU) - elapsed 12s rc=1
+watcher: FAILED - no live watcher with a fresh beacon
+arm_pid=11658	watcher_pid=11709	origin=started	started_at=1793135630	ended_at=1793135641	exit_code=143	signal=TERM	reason=confirmation-timeout	beacon_age=999999	lock_before=pid:none|identity:none	lock_after=pid:none|identity:none	successor=none
