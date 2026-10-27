@@ -108,7 +108,7 @@ test_announced_recovery_is_not_reannounced_by_next_checkpoint() {
 
   status=0
   FM_HOME="$home" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 \
-    "$CHECKPOINT" --seconds 5 >"$out" 2>"$err" || status=$?
+    "$CHECKPOINT" --seconds 30 >"$out" 2>"$err" || status=$?
   expect_code 0 "$status" "first recovery checkpoint exit"
   assert_contains "$(cat "$out")" "check: rearm-resurface" \
     "first checkpoint did not announce the pending recovery"
@@ -146,7 +146,7 @@ test_never_announced_recovery_is_announced_once() {
 
   status=0
   FM_HOME="$home" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 \
-    "$CHECKPOINT" --seconds 5 >"$out" 2>"$err" || status=$?
+    "$CHECKPOINT" --seconds 30 >"$out" 2>"$err" || status=$?
 
   expect_code 0 "$status" "pending recovery checkpoint exit"
   [ "$(grep -c '^check: rearm-resurface$' "$out" || true)" -eq 1 ] \
@@ -162,8 +162,12 @@ test_queue_append_during_checkpoint_still_resurfaces() {
   out="$home/out.txt"
   err="$home/err.txt"
 
+  # The bound counts from launch, so it covers fm-watch.sh's startup too, which
+  # load stretches to several seconds. A passing run returns as soon as the
+  # append resurfaces, so the generous bound costs nothing and keeps the append
+  # from racing the deadline.
   FM_HOME="$home" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 \
-    "$CHECKPOINT" --seconds 5 >"$out" 2>"$err" &
+    "$CHECKPOINT" --seconds 30 >"$out" 2>"$err" &
   checkpoint_pid=$!
   wait_for_checkpoint_lock "$home" || {
     kill "$checkpoint_pid" 2>/dev/null || true
@@ -194,7 +198,9 @@ test_signal_passes_through_and_exits_zero() {
     printf 'done: synthetic wake\n' > "$home/state/demo.status"
   ) &
   status=0
-  FM_HOME="$home" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 "$CHECKPOINT" --seconds 8 >"$out" 2>"$err" || status=$?
+  # Generous for the same reason as the queue-append case: the bound includes
+  # watcher startup, and a passing run returns as soon as the signal surfaces.
+  FM_HOME="$home" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 "$CHECKPOINT" --seconds 30 >"$out" 2>"$err" || status=$?
   expect_code 0 "$status" "signal checkpoint exit"
   assert_contains "$(cat "$out")" "signal:" "signal wake was not passed through"
   drained=$(FM_HOME="$home" "$ROOT/bin/fm-wake-drain.sh")
@@ -215,7 +221,7 @@ SH
   FM_HOME="$home" "$ROOT/bin/fm-check-register.sh" env-check >/dev/null \
     || fail "could not register checkpoint custom check"
   status=0
-  FM_HOME="$home" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=1 "$CHECKPOINT" --seconds 5 >"$out" 2>"$err" || status=$?
+  FM_HOME="$home" FM_POLL=1 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=1 "$CHECKPOINT" --seconds 30 >"$out" 2>"$err" || status=$?
   expect_code 0 "$status" "check checkpoint exit"
   assert_contains "$(cat "$out")" "check:" "check wake was not passed through"
   assert_contains "$(cat "$out")" "FM_CHECK_INTERVAL=1" "watcher environment was not preserved"

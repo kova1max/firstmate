@@ -177,11 +177,10 @@ test_stale_watch_lock_reclaimed() {
 # startup has run its recovery-marker checks. An INT landing in that startup
 # window (fm-watch-checkpoint.sh's bounded INT can) used to kill the process with
 # the default disposition and strand a lock naming a dead pid. fm-watch.sh now
-# installs an INT-only release handler right after acquisition, and
-# FM_WATCH_STARTUP_HANG holds the watcher in that handler-covered window. The
-# test waits on the hang's readiness marker rather than on the lock pid, because
-# the pid is published a few statements earlier and interrupting on its
-# appearance would race the handler's install. The watcher is launched under job
+# installs an INT-only release handler before acquisition, and
+# FM_WATCH_STARTUP_HANG holds the watcher in that handler-covered window. This
+# test waits on the hang's readiness marker; the race test below interrupts on
+# the lock pid's first appearance instead. The watcher is launched under job
 # control because a non-interactive shell starts its background jobs with SIGINT
 # ignored, and an ignored-on-entry signal cannot be trapped.
 test_startup_window_interrupt_releases_the_lock() {
@@ -221,6 +220,42 @@ test_startup_window_interrupt_releases_the_lock() {
   assert_present "$state/.watcher-down" \
     "a startup-window INT released the lock without publishing the downtime marker"
   pass "a watcher interrupted inside its startup window releases the singleton lock"
+}
+
+# The handler must already exist when the lock pid appears: an INT sent the
+# instant the pid is visible used to land before the handler was installed and
+# strand the lock under a dead pid in a sizeable share of runs. Repeat the race
+# so a reintroduced gap shows up as a failure rather than an occasional pass.
+test_interrupt_on_lock_pid_appearance_releases_the_lock() {
+  local dir state fakebin out pid run i
+  dir=$(make_case lock-pid-appearance-interrupt)
+  state="$dir/state"
+  fakebin="$dir/fakebin"
+  out="$dir/watch.out"
+  for run in 1 2 3 4 5 6; do
+    rm -rf "$state/.watch.lock" "$state/.watch-startup-hang"
+    set -m
+    PATH="$fakebin:$PATH" FM_STATE_OVERRIDE="$state" FM_WATCH_STARTUP_HANG=30 \
+      FM_POLL=5 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH" > "$out" 2>&1 &
+    pid=$!
+    set +m
+    i=0
+    while [ "$i" -lt 4000 ] && [ "$(cat "$state/.watch.lock/pid" 2>/dev/null || true)" != "$pid" ]; do
+      i=$((i + 1))
+    done
+    [ "$(cat "$state/.watch.lock/pid" 2>/dev/null || true)" = "$pid" ] \
+      || fail "run $run: watcher never published its lock pid"
+    kill -INT "$pid" 2>/dev/null || true
+    i=0
+    while [ "$i" -lt 400 ] && is_live_non_zombie "$pid"; do
+      sleep 0.05
+      i=$((i + 1))
+    done
+    is_live_non_zombie "$pid" && fail "run $run: watcher did not exit on an INT at lock pid appearance"
+    wait "$pid" 2>/dev/null || true
+    assert_absent "$state/.watch.lock" "run $run: an INT at lock pid appearance stranded the watch lock"
+  done
+  pass "an INT sent the instant the lock pid appears releases the singleton lock"
 }
 
 test_live_stale_watch_lock_is_actionable() {
@@ -1630,6 +1665,7 @@ test_msys_pid_identity_uses_proc
 test_stale_watch_lock_reclaimed
 test_stale_watch_reclaim_publishes_before_clear
 test_startup_window_interrupt_releases_the_lock
+test_interrupt_on_lock_pid_appearance_releases_the_lock
 test_live_stale_watch_lock_is_actionable
 test_live_stalled_watch_lock_is_replaced_past_hard_bound
 test_guard_warnings
