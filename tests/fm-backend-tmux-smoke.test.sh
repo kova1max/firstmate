@@ -344,7 +344,7 @@ spawn_in_home() {  # <home-name>; each home is its own installation root
   env -u TMUX -u TMUX_PANE FM_ROOT_OVERRIDE="$inst" FM_HOME="$inst" HOME="$inst/user-home" \
     CLAUDE_CONFIG_DIR='' FM_STATE_OVERRIDE="$inst/state" FM_DATA_OVERRIDE="$inst/data" \
     FM_PROJECTS_OVERRIDE="$inst/projects" FM_CONFIG_OVERRIDE="$inst/config" \
-    FM_SPAWN_NO_GUARD=1 PATH="$SPAWN_LAB/bin:$PATH" \
+    FM_GATE_REFUSE_BYPASS=1 FM_SPAWN_NO_GUARD=1 PATH="$SPAWN_LAB/bin:$PATH" \
     "$ROOT/bin/fm-spawn.sh" same-id "$proj" --scout --harness codex 2>&1
 }
 
