@@ -734,8 +734,9 @@ child_out=$(mktemp "$STATE/.watch-arm-output.XXXXXX") || {
 # collapsing when startup begins just before the next second boundary.
 confirm_start=$(date +%s)
 deadline=$(( confirm_start + CONFIRM_TIMEOUT + 1 ))
-window_end=$deadline
 confirm_limit=$(( confirm_start + GRACE ))
+window_end=$deadline
+[ "$window_end" -le "$confirm_limit" ] || window_end=$confirm_limit
 if [ -n "${FM_WATCH_PREDECESSOR_ARM_PID:-}" ]; then
   FM_WATCH_HANDLING_SUCCESSOR=1 "$WATCH" >"$child_out" &
 else
