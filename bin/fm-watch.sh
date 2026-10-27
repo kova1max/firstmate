@@ -3497,7 +3497,7 @@ watcher_cleanup() {
   fi
   return "$cleanup_status"
 }
-# These supersede the startup interrupt handler installed right after lock
+# These supersede the startup interrupt handler installed before lock
 # acquisition: from here on the EXIT trap owns lock release.
 trap watcher_cleanup EXIT
 watcher_stop_signals
