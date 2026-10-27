@@ -1,0 +1,7 @@
+run 1: checkpoint exit=124 lock gone | checkpoint: no actionable wake within 1s 
+run 2: checkpoint exit=124 lock gone | checkpoint: no actionable wake within 1s 
+run 3: checkpoint exit=124 lock gone | checkpoint: no actionable wake within 1s 
+run 4: checkpoint exit=124 lock gone | checkpoint: no actionable wake within 1s 
+run 5: checkpoint exit=124 lock gone | checkpoint: no actionable wake within 1s 
+run 6: checkpoint exit=124 lock gone | checkpoint: no actionable wake within 1s 
+SUMMARY root=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG runs=6 lock-left=0

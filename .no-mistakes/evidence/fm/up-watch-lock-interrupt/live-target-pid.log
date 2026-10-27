@@ -1,0 +1,13 @@
+run 1: exit=1 lock released, downtime marker published
+run 2: exit=1 lock released, downtime marker published
+run 3: exit=1 lock released, downtime marker published
+run 4: exit=1 lock released, downtime marker published
+run 5: exit=1 lock released, downtime marker published
+run 6: exit=1 lock released, downtime marker published
+run 7: exit=1 lock released, downtime marker published
+run 8: exit=1 lock released, downtime marker published
+run 9: exit=1 lock released, downtime marker published
+run 10: exit=1 lock released, downtime marker published
+SUMMARY root=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG mode=pid runs=10 stranded=0 released=10 pre-acquire=0
+TAKEOVER: lock pid=66812 fresh watcher pid=66812; watcher output: 
+after TERM of fresh watcher: lock present=yes

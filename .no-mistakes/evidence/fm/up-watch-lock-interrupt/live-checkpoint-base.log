@@ -1,0 +1,7 @@
+run 1: checkpoint exit=124 LOCK LEFT pid=76791 alive=no | checkpoint: no actionable wake within 1s 
+run 2: checkpoint exit=124 LOCK LEFT pid=77515 alive=no | checkpoint: no actionable wake within 1s 
+run 3: checkpoint exit=124 lock gone | checkpoint: no actionable wake within 1s 
+run 4: checkpoint exit=124 LOCK LEFT pid=79042 alive=no | checkpoint: no actionable wake within 1s 
+run 5: checkpoint exit=124 LOCK LEFT pid=79042 alive=no | checkpoint: no actionable wake within 1s 
+run 6: checkpoint exit=124 LOCK LEFT pid=79042 alive=no | checkpoint: no actionable wake within 1s 
+SUMMARY root=/tmp/fm-base.2tpIu9 runs=6 lock-left=5

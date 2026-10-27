@@ -1,0 +1,18 @@
+delay=0.05s base run1: watcher exit status: 130 lock dir REMAINS, holder pid=72914 alive=no successor pid=73609 lock holder=73609 running=yes 
+delay=0.05s base run2: watcher exit status: 130 lock dir REMAINS, holder pid=75170 alive=no successor pid=75792 lock holder=75792 running=yes 
+delay=0.05s base run3: watcher exit status: 130 lock dir REMAINS, holder pid=77159 alive=no successor pid=77870 lock holder=77870 running=yes 
+delay=0.05s fix run1: watcher exit status: 1 lock dir released successor pid=80127 lock holder=80127 running=yes 
+delay=0.05s fix run2: watcher exit status: 1 lock dir released successor pid=81836 lock holder=81836 running=yes 
+delay=0.05s fix run3: watcher exit status: 1 lock dir released successor pid=83366 lock holder=83366 running=yes 
+delay=0.2s base run1: watcher exit status: 130 lock dir REMAINS, holder pid=84536 alive=no successor pid=85130 lock holder=85130 running=yes 
+delay=0.2s base run2: watcher exit status: 130 lock dir REMAINS, holder pid=86453 alive=no successor pid=87171 lock holder=87171 running=yes 
+delay=0.2s base run3: watcher exit status: 130 lock dir REMAINS, holder pid=89169 alive=no successor pid=90181 lock holder=90181 running=yes 
+delay=0.2s fix run1: watcher exit status: 1 lock dir released successor pid=93224 lock holder=93224 running=yes 
+delay=0.2s fix run2: watcher exit status: 1 lock dir released successor pid=95385 lock holder=95385 running=yes 
+delay=0.2s fix run3: watcher exit status: 1 lock dir released successor pid=97585 lock holder=97585 running=yes 
+delay=0.5s base run1: watcher exit status: 130 lock dir REMAINS, holder pid=98243 alive=no successor pid=99060 lock holder=99060 running=yes 
+delay=0.5s base run2: watcher exit status: 130 lock dir REMAINS, holder pid=1199 alive=no successor pid=2033 lock holder=2033 running=yes 
+delay=0.5s base run3: watcher exit status: 130 lock dir REMAINS, holder pid=3809 alive=no successor pid=4458 lock holder=4458 running=yes 
+delay=0.5s fix run1: watcher exit status: 1 lock dir released successor pid=6989 lock holder=6989 running=yes 
+delay=0.5s fix run2: watcher exit status: 1 lock dir released successor pid=9182 lock holder=9182 running=yes 
+delay=0.5s fix run3: watcher exit status: 1 lock dir released successor pid=11578 lock holder=11578 running=yes 

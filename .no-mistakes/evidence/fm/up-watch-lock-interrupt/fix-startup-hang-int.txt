@@ -1,0 +1,10 @@
+== [fix] mode=hang bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 96905 (watcher pid 96905)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:96905.1793132786.QGBQPe 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=97846 lock holder=97846 running=yes
+successor output:

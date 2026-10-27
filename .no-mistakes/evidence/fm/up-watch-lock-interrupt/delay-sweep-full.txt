@@ -1,0 +1,171 @@
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 72914 (watcher pid 72914)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=72914 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=73609 lock holder=73609 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 75170 (watcher pid 75170)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=75170 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=75792 lock holder=75792 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 77159 (watcher pid 77159)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=77159 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=77870 lock holder=77870 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 79194 (watcher pid 79194)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:79194.1793134009.HbOePw 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=80127 lock holder=80127 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 80798 (watcher pid 80798)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:80798.1793134014.3THXXm 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=81836 lock holder=81836 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 82424 (watcher pid 82424)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:82424.1793134018.nvQ5Q0 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=83366 lock holder=83366 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 84536 (watcher pid 84536)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=84536 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=85130 lock holder=85130 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 86453 (watcher pid 86453)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=86453 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=87171 lock holder=87171 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 89169 (watcher pid 89169)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=89169 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=90181 lock holder=90181 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 92156 (watcher pid 92156)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:92156.1793134046.o3CBmd 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=93224 lock holder=93224 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 94343 (watcher pid 94343)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:94343.1793134051.i3Rrks 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=95385 lock holder=95385 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 95997 (watcher pid 95997)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:95997.1793134058.i5eIrM 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=97585 lock holder=97585 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 98243 (watcher pid 98243)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=98243 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=99060 lock holder=99060 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 1199 (watcher pid 1199)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=1199 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=2033 lock holder=2033 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 3809 (watcher pid 3809)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=3809 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=4458 lock holder=4458 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 5637 (watcher pid 5637)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:5637.1793134083.tdMNxb 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=6989 lock holder=6989 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 8023 (watcher pid 8023)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:8023.1793134088.65u14c 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=9182 lock holder=9182 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 10286 (watcher pid 10286)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:10286.1793134095.QQFD6b 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=11578 lock holder=11578 running=yes
+successor output:

@@ -1,0 +1,45 @@
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 59555 (watcher pid 59555)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=59555 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=59800 lock holder=59800 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 60033 (watcher pid 60033)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=60033 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=60570 lock holder=60570 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 61424 (watcher pid 61424)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=61424 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=61806 lock holder=61806 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 63266 (watcher pid 63266)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=63266 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=63833 lock holder=63833 running=yes
+successor output:
+== [base] mode=race bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.UhPALj/bin
+lock pid before signal: 65088 (watcher pid 65088)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=65088 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=66014 lock holder=66014 running=yes
+successor output:

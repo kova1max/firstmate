@@ -1,0 +1,49 @@
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 66767 (watcher pid 66767)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:66767.1793133221.nCL1yb 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=67075 lock holder=67075 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 67350 (watcher pid 67350)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=67350 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=67990 lock holder=67990 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 69114 (watcher pid 69114)
+sent SIGINT
+watcher exit status: 130
+lock dir REMAINS, holder pid=69114 alive=no
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=69290 lock holder=69290 running=yes
+successor output:
+   check: rearm-resurface
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 71153 (watcher pid 71153)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:71153.1793133233.WhzU6f 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=71860 lock holder=71860 running=yes
+successor output:
+== [fix] mode=race bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M5ZGKEN8J3NP456VNZZZ21MG/bin
+lock pid before signal: 72451 (watcher pid 72451)
+sent SIGINT
+watcher exit status: 1
+lock dir released
+downtime marker published: pending:downtime:72451.1793133236.NlGu6Z 
+-- watcher output:
+-- successor arm (fm-watch.sh started fresh):
+successor pid=73536 lock holder=73536 running=yes
+successor output:

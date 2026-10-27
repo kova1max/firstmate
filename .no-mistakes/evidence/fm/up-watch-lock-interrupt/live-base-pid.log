@@ -1,0 +1,13 @@
+run 1: exit=130 STRANDED lock pid=67231 (alive: no) down-marker=no
+run 2: exit=130 STRANDED lock pid=67680 (alive: no) down-marker=no
+run 3: exit=130 STRANDED lock pid=68020 (alive: no) down-marker=no
+run 4: exit=130 STRANDED lock pid=68257 (alive: no) down-marker=no
+run 5: exit=130 STRANDED lock pid=68849 (alive: no) down-marker=no
+run 6: exit=130 STRANDED lock pid=69262 (alive: no) down-marker=no
+run 7: exit=130 STRANDED lock pid=69531 (alive: no) down-marker=no
+run 8: exit=130 STRANDED lock pid=70144 (alive: no) down-marker=no
+run 9: exit=130 STRANDED lock pid=70409 (alive: no) down-marker=no
+run 10: exit=130 STRANDED lock pid=70654 (alive: no) down-marker=no
+SUMMARY root=/tmp/fm-base.2tpIu9 mode=pid runs=10 stranded=10 released=0 pre-acquire=0
+TAKEOVER: lock pid=70936 fresh watcher pid=70936; watcher output: 
+after TERM of fresh watcher: lock present=yes
