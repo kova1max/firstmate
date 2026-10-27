@@ -1,0 +1,30 @@
+=== fm-send from home-b (secondmate) to its same-id task
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T/fm-lab.d5zdz7/home-b
+RC=0
+=== doorbell lines per window (only home-b's window should have one)
+firstmate:fm-firstmate-cb101ef3-same-id: 0
+firstmate:fm-2ndmate-design-cb101ef3-same-id: 1
+=== fm-peek from home-a
+❯ 
+  Opus 5.5 | ctx: 4% used
+  ⏵⏵ bypass permissions on (shift+tab to cycle)
+RC=0
+=== fm-teardown same-id --force in home-a
+teardown: reaping leaked worktree process(es) for same-id: 44838 59933 61244 61245 61860
+teardown: force-killing leaked worktree process(es) for same-id: 44838
+teardown same-id complete (window firstmate:fm-firstmate-cb101ef3-same-id, worktree /private/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T/fm-lab.d5zdz7/proj-a.wt)
+Backlog: same-id just finished (this home keeps no markdown backlog at /private/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T/fm-lab.d5zdz7/home-a/data/backlog.md). Update /private/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T/fm-lab.d5zdz7/home-a/data/backlog.md - move same-id to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+RC=0
+=== windows after home-a teardown
+firstmate:bash pane_cmd=bash
+firstmate:fm-2ndmate-design-cb101ef3-same-id pane_cmd=claude
+home-a meta: No such file or directory
+home-b meta: window=firstmate:fm-2ndmate-design-cb101ef3-same-id
+=== fm-teardown same-id --force in home-b
+teardown: reaping leaked worktree process(es) for same-id: 65902 88219 88620 88621 88630 88945
+teardown: force-killing leaked worktree process(es) for same-id: 65902
+teardown same-id complete (window firstmate:fm-2ndmate-design-cb101ef3-same-id, worktree /private/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T/fm-lab.d5zdz7/proj-b.wt)
+Backlog: same-id just finished (this home keeps no markdown backlog at /private/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T/fm-lab.d5zdz7/home-b/data/backlog.md). Update /private/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T/fm-lab.d5zdz7/home-b/data/backlog.md - move same-id to Done, keep Done to the 10 most recent, then re-scan Queued and dispatch only work whose blockers are gone and date is due.
+RC=0
+=== windows after both teardowns
+firstmate:bash

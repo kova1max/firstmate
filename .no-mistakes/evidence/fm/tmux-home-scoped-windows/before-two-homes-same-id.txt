@@ -1,0 +1,19 @@
+=== BEFORE (base 7da4c362) (FM_ROOT=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-base.CwsEkR)
+--- home-a spawn output
+spawned same-id harness=claude kind=scout window=firstmate:fm-same-id worktree=/private/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T/fm-lab.WdonXG/proj-a.wt
+RC=0
+--- home-a meta window: window=firstmate:fm-same-id
+--- home-b spawn output
+error: window firstmate:fm-same-id already exists
+RC=1
+--- home-b meta window: <none>
+--- windows in shared session
+firstmate:bash pane_cmd=bash
+firstmate:fm-same-id pane_cmd=claude
+--- home-a window firstmate:fm-same-id pane tail:
+                                                                                                  tmux focus-events off · add 'set -g focus-events on' to ~/.tmux.conf and reattach for focus tracking
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  Opus 5.5 | ctx: 4% used
+  ⏵⏵ bypass permissions on (shift+tab to cycle)

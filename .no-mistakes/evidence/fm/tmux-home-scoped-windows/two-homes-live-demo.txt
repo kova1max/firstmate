@@ -1,0 +1,12 @@
+$ fm-spawn.sh same-id (home-a)
+spawned same-id harness=codex kind=scout window=firstmate:fm-firstmate-d4706fb6-same-id worktree=/private/tmp/fm-demo.2bLGDS/home-a-project.wt
+exit 
+recorded: window=firstmate:fm-firstmate-d4706fb6-same-id
+$ fm-spawn.sh same-id (home-b)
+spawned same-id harness=codex kind=scout window=firstmate:fm-firstmate-ac7e3ed2-same-id worktree=/private/tmp/fm-demo.2bLGDS/home-b-project.wt
+exit 
+recorded: window=firstmate:fm-firstmate-ac7e3ed2-same-id
+$ tmux list-windows -t firstmate
+0: bash
+1: fm-firstmate-d4706fb6-same-id
+2: fm-firstmate-ac7e3ed2-same-id
