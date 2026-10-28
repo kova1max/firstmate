@@ -1320,7 +1320,10 @@ SH
   FM_STATE_OVERRIDE="$state" "$ROOT/bin/fm-check-register.sh" task >/dev/null \
     || fail "could not register cycle-ledger check"
 
-  PATH="$fakebin:$PATH" FM_STATE_OVERRIDE="$state" FM_GUARD_GRACE=0 FM_POLL=5 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=0 FM_HEARTBEAT=999999 "$WATCH_ARM" > "$armout" &
+  # Like the immediate-wake case, this child runs the registered check before
+  # exiting, which can outlast the production confirmation budget under host
+  # load. The ledger is the assertion here, not the deadline (issue #2844).
+  PATH="$fakebin:$PATH" FM_STATE_OVERRIDE="$state" FM_GUARD_GRACE=0 FM_POLL=5 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=0 FM_HEARTBEAT=999999 FM_ARM_CONFIRM_TIMEOUT=60 "$WATCH_ARM" > "$armout" &
   first_arm=$!
   wait "$first_arm" || fail "first ledger cycle did not surface its actionable wake"
   grep -q "arm_pid=$first_arm.*reason=actionable-check.*successor=none" "$state/.watch-cycle-exits.log" \
