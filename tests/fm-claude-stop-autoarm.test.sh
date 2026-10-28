@@ -589,6 +589,21 @@ test_late_reporting_handling_successor_is_confirmed() {
   pass "auto-arm: a handling successor confirming past FM_ARM_CONFIRM_TIMEOUT is still confirmed"
 }
 
+# The arm never shortens its first confirmation window, so a grace below it
+# must not cut the hook's successor wait short.
+test_handling_successor_within_first_window_above_grace_is_confirmed() {
+  local dir out status
+  dir=$(make_primary_dir "$TMP_ROOT/successor-first-window")
+  : > "$dir/state/task.meta"
+  write_arm_fixture "$dir" attached-delivered
+  printf '7\n' > "$dir/state/successor-delay"
+  out=$(FM_ARM_CONFIRM_TIMEOUT=8 FM_GUARD_GRACE=1 run_autoarm "$dir" 2>/dev/null); status=$?
+  expect_code 2 "$status" "a handling successor confirming inside the first window must still rewake"
+  assert_contains "$out" "signal: task.status done: fixture peer cycle ended" "rewake must carry the delivered reason"
+  assert_not_contains "$out" "did not confirm" "a successor confirming inside the first window is confirmed even with a shorter grace"
+  pass "auto-arm: a handling successor confirming inside a first window longer than the grace is confirmed"
+}
+
 test_silent_handling_successor_is_bounded_by_grace() {
   local dir out status start elapsed
   dir=$(make_primary_dir "$TMP_ROOT/successor-silent")
@@ -2044,6 +2059,7 @@ test_actionable_close_with_live_successor_rewakes_once
 test_attached_cycle_end_starts_handling_successor
 test_unconfirmed_handling_successor_still_rewakes
 test_late_reporting_handling_successor_is_confirmed
+test_handling_successor_within_first_window_above_grace_is_confirmed
 test_silent_handling_successor_is_bounded_by_grace
 test_failed_close_rewakes_with_failure_banner
 test_failed_cycles_notify_once_and_keep_retrying

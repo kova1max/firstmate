@@ -360,16 +360,22 @@ run_arm() {  # <output file, or empty for none>
 # successor receives the closed arm's pid as FM_WATCH_PREDECESSOR_ARM_PID; it
 # must outlive this hook's exit, so it is detached three ways: nohup, stdio
 # away from the hook's pipes, and its own process group. Its one status line
-# is awaited until the successor exits or GRACE plus startup slack elapses:
-# the arm keeps extending its confirmation windows for a watcher still making
-# progress, up to the FM_GUARD_GRACE passed to it, so FM_ARM_CONFIRM_TIMEOUT
-# alone would report a slow but valid start as unconfirmed. Sets
-# SUCCESSOR_FAILURE to the banner line for an unconfirmed successor.
+# is awaited until the successor exits or the larger of GRACE and the arm's
+# full first window (FM_ARM_CONFIRM_TIMEOUT plus one) elapses, plus startup
+# slack: the arm never shortens its first window, and keeps extending further
+# windows for a watcher still making progress up to the FM_GUARD_GRACE passed
+# to it. Sets SUCCESSOR_FAILURE to the banner line for an unconfirmed successor.
 SUCCESSOR_FAILURE=
 start_handling_successor() {  # <closed-arm-pid>
-  local out pid deadline budget line monitor_was_on=0
+  local out pid deadline budget window line monitor_was_on=0
   budget=$GRACE
   case "$budget" in ''|*[!0-9]*) budget=300 ;; esac
+  case "${OSTYPE:-}" in
+    msys*|mingw*|cygwin*) window=${FM_ARM_CONFIRM_TIMEOUT:-30} ;;
+    *) window=${FM_ARM_CONFIRM_TIMEOUT:-10} ;;
+  esac
+  case "$window" in ''|*[!0-9]*) window=30 ;; esac
+  [ "$(( window + 1 ))" -le "$budget" ] || budget=$(( window + 1 ))
   if ! out=$(mktemp "$STATE/.claude-autoarm-successor.XXXXXX"); then
     SUCCESSOR_FAILURE='The handling successor did not confirm a live watcher (its output file could not be created); this handling turn runs uncovered until the next turn end re-arms.'
     return 1

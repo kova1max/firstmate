@@ -172,7 +172,7 @@ Claude's Stop hook also starts one handling successor before notification.
 After an actionable foreground close, including an attached peer cycle that ended, the hook:
 
 1. Launches `bin/fm-watch-arm.sh` with the closed arm's pid as `FM_WATCH_PREDECESSOR_ARM_PID`.
-2. Waits for that arm's one status line, until the arm exits or the hook's guard grace plus a few seconds elapses, because the arm extends its confirmation windows for a watcher still making progress up to that grace.
+2. Waits for that arm's one status line, until the arm exits or the larger of the hook's guard grace and the arm's full first confirmation window, plus a few seconds, elapses, because the arm never shortens its first window and extends further windows for a watcher still making progress up to that grace.
 3. Only then exits 2 with the wake.
 
 A child of the hook cannot outlive its exit-2 rewake.
@@ -514,7 +514,7 @@ It checks that a newly appended keyed decision is classified without rereading e
 - One-notice failure episodes.
 - Exit-2 translation.
 - The handling successor an ended attached cycle starts with the closed arm as its predecessor and that outlives the rewake.
-- An unconfirmed successor reported in the banner without withholding the wake, a successor confirming past `FM_ARM_CONFIRM_TIMEOUT` still confirmed, and a silent successor bounded by the grace.
+- An unconfirmed successor reported in the banner without withholding the wake, a successor confirming past `FM_ARM_CONFIRM_TIMEOUT` or inside a first window longer than the grace still confirmed, and a silent successor bounded by the grace.
 - Host-timeout HUP/TERM/INT translation into the same durable failure handoff.
 
 It also covers generation-claim single-flight, stuck-claim supersession, superseded-owner silence, notice-marker refusal and retry, ownership-atomic episode reset, and the legacy upgrade shim.
