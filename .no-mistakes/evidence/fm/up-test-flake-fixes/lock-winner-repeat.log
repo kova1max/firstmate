@@ -1,0 +1,15 @@
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+lock-winner repeat (fresh case dir each run): pass=12 fail=0
+elapsed=70s load=10.92 10.44 11.89

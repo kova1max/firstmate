@@ -1,0 +1,5 @@
+ok - disposable watcher refuses inherited state outside its marked lab
+.nm-wl-B.sh: рядок 379: wait: процес 72040 не є відгалуженим від цієї оболонки
+.nm-wl-B.sh: рядок 379: wait: процес 72127 не є відгалуженим від цієї оболонки
+not ok - only 39 of 40 contenders tried the lock before release
+exit=1 elapsed=378s

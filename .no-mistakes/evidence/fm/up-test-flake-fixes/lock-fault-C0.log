@@ -1,0 +1,3 @@
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+exit=0 elapsed=30s

@@ -1,0 +1,3 @@
+ok - disposable watcher refuses inherited state outside its marked lab
+ok - cycle-exit ledger links a verified successor and remains size-capped
+exit=0 elapsed=117s load=8.10 9.97 11.52

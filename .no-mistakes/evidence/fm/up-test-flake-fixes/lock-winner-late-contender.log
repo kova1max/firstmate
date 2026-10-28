@@ -1,0 +1,8 @@
+=== new test (7ba1c70c), contender mutation: late (contender 1 sleeps 20s; barrier capped at 20 polls)
+not ok - only 39 of 40 contenders tried the lock before release
+real 31.69
+exit=1
+=== old test (93a31a4c), contender mutation: late (contender 1 sleeps 20s; barrier capped at 20 polls)
+not ok - expected exactly one lock winner under concurrency, got 2
+real 30.19
+exit=1

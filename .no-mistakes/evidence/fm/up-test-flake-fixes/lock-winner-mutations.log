@@ -1,0 +1,18 @@
+=== new test (7ba1c70c), contender mutation: good
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+exit=0
+=== new test (7ba1c70c), contender mutation: loserfail
+not ok - 39 contender(s) exited non-zero
+exit=1
+=== new test (7ba1c70c), contender mutation: late
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+exit=0
+=== old test (93a31a4c), contender mutation: good
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+exit=0
+=== old test (93a31a4c), contender mutation: loserfail
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+exit=0
+=== old test (93a31a4c), contender mutation: late
+ok - concurrent fm_lock_try_acquire yields exactly one winner
+exit=0
