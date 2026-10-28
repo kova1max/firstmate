@@ -1,0 +1,16 @@
+### scenario: bounded checkpoints (--seconds 1) x8, lock state after each
+checkpoint 1 exit=124 lock_pid=none
+checkpoint 2 exit=124 lock_pid=none
+checkpoint 3 exit=124 lock_pid=none
+checkpoint 4 exit=124 lock_pid=none
+checkpoint 5 exit=124 lock_pid=none
+checkpoint 6 exit=124 lock_pid=none
+checkpoint 7 exit=124 lock_pid=none
+checkpoint 8 exit=124 lock_pid=none
+### scenario: INT to a second watcher must not release a live holder's lock
+(eval):set:6: can't change option: -m
+### scenario: INT to a second watcher must not release a live holder lock
+holder A=72742
+B=74208 exit=130; B output: 
+lock pid after B interrupted: 72742 (A alive: yes)
+A exit=1 lock after A INT: none

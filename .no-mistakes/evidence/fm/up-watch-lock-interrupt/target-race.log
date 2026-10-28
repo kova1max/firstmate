@@ -1,0 +1,20 @@
+run 1: exit=1 lock released
+run 2: exit=1 lock released
+run 3: exit=1 lock released
+run 4: exit=1 lock released
+run 5: exit=1 lock released
+run 6: exit=1 lock released
+run 7: exit=1 lock released
+run 8: exit=1 lock released
+run 9: exit=1 lock released
+run 10: exit=1 lock released
+run 11: exit=1 lock released
+run 12: exit=1 lock released
+run 13: exit=1 lock released
+run 14: exit=1 lock released
+run 15: exit=1 lock released
+SUMMARY root=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M602CPP6HADHYJCRKPZ5FH2H runs=15 stranded=0
+--- follow-up arm after the last run (fm-watch-checkpoint --seconds 3):
+check: rearm-resurface
+checkpoint exit=0
+ls: /var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fm-lab.IbodEg/state/.watch.lock: No such file or directory
