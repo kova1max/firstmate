@@ -1,0 +1,17 @@
+=== BASE 7da4c362: watcher start busy 16s, default FM_ARM_CONFIRM_TIMEOUT (10)  bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fmbase.SOu2KA/bin  env:  slow-start snippet: end=$((SECONDS + 16)); while [ "$SECONDS" -lt "$end" ]; do :; done
+load: 8.85 8.73 9.15
+status line after 12s:
+watcher: FAILED - no live watcher with a fresh beacon
+ledger:
+  arm_pid=85768 watcher_pid=85988 origin=started started_at=1793153369 ended_at=1793153380 exit_code=143 signal=TERM reason=confirmation-timeout beacon_age=24 lock_before=pid:none|identity:none lock_after=pid:none|identity:none successor=none
+arm exit status: 1
+no leftover processes
+
+=== TARGET ab79e99f: watcher start busy 16s, default FM_ARM_CONFIRM_TIMEOUT (10)  bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M603TTBXMK3K9M7ZHT4SV10Q/bin  env:  slow-start snippet: end=$((SECONDS + 16)); while [ "$SECONDS" -lt "$end" ]; do :; done
+load: 8.99 8.78 9.16
+status line after 21s:
+watcher: started pid=90510 (beacon fresh)
+ledger:
+arm exit status: 143
+no leftover processes
+

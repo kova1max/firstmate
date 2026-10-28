@@ -1,0 +1,35 @@
+40 CPU burners (yes) running on 10 cores; window scaled down to FM_ARM_CONFIRM_TIMEOUT=1 to mirror a start slower than the window
+=== BASE 7da4c362 under real load run 1  bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fmbase.SOu2KA/bin  env: FM_ARM_CONFIRM_TIMEOUT=1 
+load: 42.47 19.58 13.25
+status line after 5s:
+watcher: FAILED - no live watcher with a fresh beacon
+ledger:
+  arm_pid=22212 watcher_pid=22287 origin=started started_at=1793153491 ended_at=1793153494 exit_code=143 signal=TERM reason=confirmation-timeout beacon_age=40 lock_before=pid:none|identity:none lock_after=pid:22287|identity:none successor=none
+arm exit status: 1
+no leftover processes
+
+=== TARGET ab79e99f under real load run 1  bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M603TTBXMK3K9M7ZHT4SV10Q/bin  env: FM_ARM_CONFIRM_TIMEOUT=1 
+load: 46.16 21.12 13.87
+status line after 5s:
+watcher: started pid=24379 (beacon fresh)
+ledger:
+arm exit status: 143
+no leftover processes
+
+=== BASE 7da4c362 under real load run 2  bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fmbase.SOu2KA/bin  env: FM_ARM_CONFIRM_TIMEOUT=1 
+load: 48.23 21.96 14.21
+status line after 4s:
+watcher: FAILED - no live watcher with a fresh beacon
+ledger:
+  arm_pid=26808 watcher_pid=26826 origin=started started_at=1793153505 ended_at=1793153507 exit_code=143 signal=TERM reason=confirmation-timeout beacon_age=5 lock_before=pid:none|identity:none lock_after=pid:26826|identity:none successor=none
+arm exit status: 1
+no leftover processes
+
+=== TARGET ab79e99f under real load run 2  bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M603TTBXMK3K9M7ZHT4SV10Q/bin  env: FM_ARM_CONFIRM_TIMEOUT=1 
+load: 49.97 22.76 14.54
+status line after 6s:
+watcher: started pid=28783 (beacon fresh)
+ledger:
+arm exit status: 143
+no leftover processes
+

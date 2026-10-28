@@ -1,0 +1,6 @@
+=== TARGET: TERM the arm during an extended window (FM_ARM_CONFIRM_TIMEOUT=3, default grace, watcher start spins)
+arm alive at 7s (past first 4s window): yes
+arm exited 143 within 1s of TERM
+arm_pid=39304 watcher_pid=39343 origin=started started_at=1793153544 ended_at=1793153550 exit_code=143 signal=TERM reason=confirmation-timeout beacon_age=34 lock_before=pid:none|identity:none lock_after=pid:none|identity:none successor=none
+arm_pid=44149 watcher_pid=44340 origin=started started_at=1793153559 ended_at=1793153566 exit_code=143 signal=TERM reason=arm-interrupted beacon_age=50 lock_before=pid:none|identity:none lock_after=pid:none|identity:none successor=none
+watcher pid 44340 alive after: no

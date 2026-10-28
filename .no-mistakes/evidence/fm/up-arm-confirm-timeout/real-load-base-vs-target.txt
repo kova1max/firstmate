@@ -1,0 +1,17 @@
+40 CPU burners (yes) running on 10 cores
+=== BASE 7da4c362 under real load, default timeout  bin=/var/folders/pb/f9rgj1l908j46jbl7bp1bc_m0000gp/T//fmbase.SOu2KA/bin  env:  
+load: 26.89 13.29 10.78
+status line after 4s:
+watcher: started pid=6259 (beacon fresh)
+ledger:
+arm exit status: 143
+no leftover processes
+
+=== TARGET ab79e99f under real load, default timeout  bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M603TTBXMK3K9M7ZHT4SV10Q/bin  env:  
+load: 32.03 14.83 11.36
+status line after 7s:
+watcher: started pid=9564 (beacon fresh)
+ledger:
+arm exit status: 143
+no leftover processes
+

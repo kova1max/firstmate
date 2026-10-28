@@ -1,0 +1,27 @@
+=== TARGET guard: stalled start (no CPU), FM_ARM_CONFIRM_TIMEOUT=3 - expect FAILED at ~4s  bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M603TTBXMK3K9M7ZHT4SV10Q/bin  env: FM_ARM_CONFIRM_TIMEOUT=3 slow-start snippet: exec sleep 60
+load: 50.22 24.67 15.42
+status line after 6s:
+watcher: FAILED - no live watcher with a fresh beacon
+ledger:
+  arm_pid=34849 watcher_pid=34898 origin=started started_at=1793153530 ended_at=1793153534 exit_code=143 signal=TERM reason=confirmation-timeout beacon_age=18 lock_before=pid:none|identity:none lock_after=pid:none|identity:none successor=none
+arm exit status: 1
+no leftover processes
+
+=== TARGET guard: spins forever, FM_ARM_CONFIRM_TIMEOUT=2 FM_GUARD_GRACE=8 - expect FAILED at ~8s  bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M603TTBXMK3K9M7ZHT4SV10Q/bin  env: FM_ARM_CONFIRM_TIMEOUT=2 FM_GUARD_GRACE=8 slow-start snippet: while :; do :; done
+load: 48.36 24.71 15.49
+status line after 8s:
+watcher: FAILED - no live watcher with a fresh beacon
+ledger:
+  arm_pid=37142 watcher_pid=37177 origin=started started_at=1793153536 ended_at=1793153543 exit_code=143 signal=TERM reason=confirmation-timeout beacon_age=27 lock_before=pid:none|identity:none lock_after=pid:none|identity:none successor=none
+arm exit status: 1
+no leftover processes
+
+=== TARGET guard: grace shorter than window, spins 12s, FM_ARM_CONFIRM_TIMEOUT=5 FM_GUARD_GRACE=1 - expect FAILED at ~6s, not ~1s  bin=/Users/m.koval/.no-mistakes/worktrees/5447c8da5417/01M603TTBXMK3K9M7ZHT4SV10Q/bin  env: FM_ARM_CONFIRM_TIMEOUT=5 FM_GUARD_GRACE=1 slow-start snippet: end=$((SECONDS + 12)); while [ "$SECONDS" -lt "$end" ]; do :; done
+load: 43.79 24.50 15.52
+status line after 7s:
+watcher: FAILED - no live watcher with a fresh beacon
+ledger:
+  arm_pid=39304 watcher_pid=39343 origin=started started_at=1793153544 ended_at=1793153550 exit_code=143 signal=TERM reason=confirmation-timeout beacon_age=34 lock_before=pid:none|identity:none lock_after=pid:none|identity:none successor=none
+arm exit status: 1
+no leftover processes
+
