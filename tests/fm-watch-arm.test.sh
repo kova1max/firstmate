@@ -1668,26 +1668,28 @@ test_arm_bounds_a_progressing_watcher_start_by_the_grace() {
   pass "watch-arm: progress never extends a watcher start's confirmation past the grace"
 }
 
-# The grace caps the first window too: with FM_GUARD_GRACE shorter than
-# FM_ARM_CONFIRM_TIMEOUT, a spinning start is reported at the grace, not after
-# the whole 31-second first window.
-test_arm_bounds_the_first_confirmation_window_by_a_shorter_grace() {
+# A grace shorter than the confirmation window keeps the full first window but
+# grants no extension: a start that spins past that window and would beat once
+# it finishes is reported at the first window, never cut short at the grace.
+test_arm_keeps_the_first_window_but_grants_no_extension_past_a_shorter_grace() {
   local dir status started elapsed
   dir=$(make_case spinning-start-short-grace)
   mkdir -p "$dir/home/data"
   started=$SECONDS
-  start_slowed_arm "$dir" 'while :; do :; done' FM_ARM_CONFIRM_TIMEOUT=30 FM_GUARD_GRACE=3
-  wait_for_exit "$ARM_PID" 600
+  # shellcheck disable=SC2016 # The watcher's own shell expands the snippet.
+  start_slowed_arm "$dir" 'end=$((SECONDS + 9)); while [ "$SECONDS" -lt "$end" ]; do :; done' \
+    FM_ARM_CONFIRM_TIMEOUT=4 FM_GUARD_GRACE=1
+  wait_for_exit "$ARM_PID" 300
   status=$?
   elapsed=$((SECONDS - started))
   [ "$status" -ne 124 ] || fail "arm never ended on a spinning watcher start: $(cat "$dir/arm.out")"
-  [ "$elapsed" -lt 20 ] \
-    || fail "arm waited ${elapsed}s, past a 3s grace toward its 31s first window: $(cat "$dir/arm.out")"
+  [ "$elapsed" -ge 4 ] \
+    || fail "arm gave up after ${elapsed}s, before its 5s first window ended: $(cat "$dir/arm.out")"
   grep -qF 'watcher: FAILED - no live watcher with a fresh beacon' "$dir/arm.out" \
-    || fail "arm did not report the typed confirmation failure: $(cat "$dir/arm.out")"
+    || fail "arm extended past a 1s grace and confirmed the slow start: $(cat "$dir/arm.out")"
   grep -q 'reason=confirmation-timeout' "$dir/state/.watch-cycle-exits.log" \
     || fail "the spinning start was not ledgered as a confirmation timeout"
-  pass "watch-arm: a grace shorter than the confirmation window bounds the first window"
+  pass "watch-arm: a grace shorter than the window keeps the first window and grants no extension"
 }
 
 # Start a real watcher through the real arm for a temporary home and set
@@ -2088,7 +2090,7 @@ test_arm_confirms_a_slow_watcher_start_that_keeps_progressing
 test_arm_fails_a_watcher_start_that_stops_progressing
 test_arm_exits_promptly_when_stopped_during_an_extended_window
 test_arm_bounds_a_progressing_watcher_start_by_the_grace
-test_arm_bounds_the_first_confirmation_window_by_a_shorter_grace
+test_arm_keeps_the_first_window_but_grants_no_extension_past_a_shorter_grace
 test_watcher_exits_when_its_state_directory_is_removed
 test_watcher_exits_when_its_home_is_removed
 test_attached_arm_exits_when_its_root_is_removed

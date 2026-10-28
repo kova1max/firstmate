@@ -369,7 +369,8 @@ fail_arm_ground_gone() {
   return 1
 }
 
-# Give a successor the same bounded confirmation window used for a fresh child.
+# Give a successor one window as long as a fresh child's first confirmation
+# window, with no progress extensions.
 # Adapter-owned continuations normally win immediately, but the bound avoids a
 # false failure when process-close delivery and lock publication cross briefly.
 wait_for_healthy_successor() {
@@ -731,12 +732,13 @@ child_out=$(mktemp "$STATE/.watch-arm-output.XXXXXX") || {
   exit 1
 }
 # date(1) exposes whole seconds. Keep the configured confirmation budget from
-# collapsing when startup begins just before the next second boundary.
+# collapsing when startup begins just before the next second boundary. The
+# first window is always the full budget; GRACE caps only the further windows
+# owned_child_progressed grants, so a shorter grace grants no extension.
 confirm_start=$(date +%s)
 deadline=$(( confirm_start + CONFIRM_TIMEOUT + 1 ))
-confirm_limit=$(( confirm_start + GRACE ))
 window_end=$deadline
-[ "$window_end" -le "$confirm_limit" ] || window_end=$confirm_limit
+confirm_limit=$(( confirm_start + GRACE ))
 if [ -n "${FM_WATCH_PREDECESSOR_ARM_PID:-}" ]; then
   FM_WATCH_HANDLING_SUCCESSOR=1 "$WATCH" >"$child_out" &
 else
