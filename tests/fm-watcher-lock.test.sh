@@ -334,7 +334,7 @@ test_guard_warnings() {
 }
 
 test_lock_single_winner_under_concurrency() {
-  local dir state lockdir marker attempted release i pids pid wins
+  local dir state lockdir marker attempted release i pids pid wins attempts failed
   dir=$(make_case lock-concurrency)
   state="$dir/state"
   lockdir="$state/.contend.lock"
@@ -369,10 +369,16 @@ test_lock_single_winner_under_concurrency() {
     sleep 0.05
     i=$((i + 1))
   done
+  # Count before releasing: a contender that only tries after the release can
+  # legitimately reclaim the winner's dead-pid lock.
+  attempts=$(awk 'NF { c++ } END { print c + 0 }' "$attempted")
   : > "$release"
+  failed=0
   for pid in $pids; do
-    wait "$pid" 2>/dev/null || true
+    wait "$pid" || failed=$((failed + 1))
   done
+  [ "$attempts" -eq 40 ] || fail "only $attempts of 40 contenders tried the lock before release"
+  [ "$failed" -eq 0 ] || fail "$failed contender(s) exited non-zero"
   wins=$(awk 'NF { c++ } END { print c + 0 }' "$marker")
   [ "$wins" -eq 1 ] || fail "expected exactly one lock winner under concurrency, got $wins"
   pass "concurrent fm_lock_try_acquire yields exactly one winner"
