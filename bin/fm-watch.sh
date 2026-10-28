@@ -3273,7 +3273,8 @@ evict_stalled_holder() {
 # This watcher's own pid, as recorded in the lock by fm_lock_claim (which writes
 # ${BASHPID:-$$} from this same main shell). Read directly, never via a command
 # substitution, so it matches the stored holder pid for the self-eviction check.
-# Set before acquisition, because the startup interrupt handler below needs it to tell "the lock on disk is mine" from "someone else's".
+# Set before acquisition, because the startup interrupt handler below needs it
+# to tell "the lock on disk is mine" from "someone else's".
 WATCHER_PID=${BASHPID:-$$}
 
 # Acquisition below publishes the lock pid, but the EXIT trap that releases it
@@ -3289,8 +3290,9 @@ WATCHER_PID=${BASHPID:-$$}
 # drop a stop request; a lock they strand names a dead pid the next acquirer
 # reclaims. It is installed before acquisition so no INT can land between the
 # lock pid appearing and the handler existing; before this process owns the lock
-# the pid check makes it a plain exit. It is deliberately not an EXIT trap: the recovery-marker checks below
-# exit 1 while retaining the lock on purpose ("retaining stale lock evidence").
+# the pid check makes it a plain exit. It is deliberately not an EXIT trap: the
+# recovery-marker checks below exit 1 while retaining the lock on purpose
+# ("retaining stale lock evidence").
 watcher_startup_interrupt() {
   trap - INT
   if [ -n "${WATCH_STARTUP_HANG_PID:-}" ]; then
