@@ -227,7 +227,7 @@ test_startup_window_interrupt_releases_the_lock() {
 # strand the lock under a dead pid in a sizeable share of runs. Repeat the race
 # so a reintroduced gap shows up as a failure rather than an occasional pass.
 test_interrupt_on_lock_pid_appearance_releases_the_lock() {
-  local dir state fakebin out pid run i
+  local dir state fakebin out pid run i deadline
   dir=$(make_case lock-pid-appearance-interrupt)
   state="$dir/state"
   fakebin="$dir/fakebin"
@@ -239,12 +239,16 @@ test_interrupt_on_lock_pid_appearance_releases_the_lock() {
       FM_POLL=5 FM_SIGNAL_GRACE=1 FM_CHECK_INTERVAL=999999 FM_HEARTBEAT=999999 "$WATCH" > "$out" 2>&1 &
     pid=$!
     set +m
-    i=0
-    while [ "$i" -lt 4000 ] && [ "$(cat "$state/.watch.lock/pid" 2>/dev/null || true)" != "$pid" ]; do
-      i=$((i + 1))
+    # Poll without sleeping so the INT lands as close to the pid's appearance as
+    # possible, but bound the poll by wall time: an iteration count lasts well
+    # under a second on a fast runner, shorter than a loaded watcher's startup.
+    deadline=$((SECONDS + 30))
+    while [ "$SECONDS" -lt "$deadline" ] \
+      && [ "$(cat "$state/.watch.lock/pid" 2>/dev/null || true)" != "$pid" ]; do
+      :
     done
     [ "$(cat "$state/.watch.lock/pid" 2>/dev/null || true)" = "$pid" ] \
-      || fail "run $run: watcher never published its lock pid"
+      || fail "run $run: watcher never published its lock pid: $(cat "$out" 2>/dev/null || true)"
     kill -INT "$pid" 2>/dev/null || true
     i=0
     while [ "$i" -lt 400 ] && is_live_non_zombie "$pid"; do
